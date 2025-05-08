@@ -1,0 +1,28 @@
+POST http://localhost:3000/genres
+Content-Type: application/json
+
+{
+  "name": "Hybrid",
+  "description": "Cross-genre or emerging categories like Afrofuturism or LGBTQ+ Literature",
+  "slug": "hybrid",
+  "imageUrl": "https://example.com/images/hybrid.jpg",
+  "isFeatured": true,
+  "isActive": false
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+PATCH http://localhost:3000/users
+Content-Type: application/json
+
+{ 
+   "id": 1,
+  "firstName": "Kigenyi",
+  "lastName": "Faizo",
+  "email": "faizokigenyi@gmail.com",
+  "password": "AcidWeGotIt1#"
+}

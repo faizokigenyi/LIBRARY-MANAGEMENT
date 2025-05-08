@@ -1,0 +1,26 @@
+
+POST http://localhost:3000/profiles
+Content-Type: application/json
+
+{
+  "bio": "Passionate about historical fiction and mystery novels.",
+  "country": "Ireland",
+  "city": "Dublin",
+  "phoneNumber": "+35315550123",
+  "dateOfBirth": "1995-10-05",
+  "gender": "male",
+  "avatarUrl": "https://example.com/avatars/lucas.jpg",
+  "website": "https://lucasreads.ie",
+  "twitterHandle": "@lucasreads",
+  "linkedinHandle": "lucas-price",
+  "userId": 10
+}
+
+
+
+
+
+
+
+
+

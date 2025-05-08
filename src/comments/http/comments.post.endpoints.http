@@ -1,0 +1,15 @@
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+  "content": "Well-researched and relevant. This book gave me fresh insights on a topic I thought I already understood.",
+  "userId": 3,
+  "bookId": 13
+}
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Everybody Writes",
+  "authorId": 5,
+  "publishedAt": "2014-09-15",
+  "isbn": "9781118905555",
+  "summary": "Your go-to guide to creating ridiculously good content.",
+  "pageCount": 344,
+  "language": "English",
+  "genres": [5]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
