@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from '../comment.entity';
 import { CreateCommentDto } from '../dtos/create-comment-dto';
 import { UsersService } from 'src/users/providers/users.service';
 import { BooksService } from 'src/books/providers/books.service';
+import { PatchCommentDto } from '../dtos/patch-comments.dto';
 
 @Injectable()
 export class CommentsService {
@@ -43,6 +44,38 @@ export class CommentsService {
       console.log('user', user);
       console.log('book', book);
       return { message: 'user or book not found' };
+    }
+  }
+
+  public async getAllComments() {
+    const comments = this.commentsRepository.find();
+    return comments;
+  }
+
+  public async patchComment(patchCommentDto: PatchCommentDto) {
+    // Find the comment that will need to be patched
+
+    const commentId = patchCommentDto.id;
+    let originalComment = await this.commentsRepository.findOneBy({
+      id: commentId,
+    });
+
+    if (originalComment) {
+      originalComment.content = patchCommentDto.content;
+      return await this.commentsRepository.save(originalComment);
+    } else {
+      throw new NotFoundException(`Comment with ID ${commentId} not found`);
+    }
+  }
+
+  public async deleteComment(id: number) {
+    // check if comment exists in the database
+    const CommentToDelete = await this.commentsRepository.findOneBy({ id: id });
+
+    if (CommentToDelete) {
+      return await this.commentsRepository.delete(CommentToDelete.id);
+    } else {
+      throw new NotFoundException("Comment doesn't exist");
     }
   }
 }

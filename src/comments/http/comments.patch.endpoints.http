@@ -1,0 +1,8 @@
+
+PATCH http://localhost:3000/comments
+Content-Type: application/json
+
+{
+  "id": 2,
+  "content": "There are some mistakes on page 57, it should be between fiction and non fiction. Overall, its good."
+}

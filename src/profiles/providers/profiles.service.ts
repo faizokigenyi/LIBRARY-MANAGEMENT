@@ -1,10 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Profile } from '../profile.entity';
 import { CreateProfileDto } from '../dtos/create-profile-dto';
 import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/providers/users.service';
+import { PatchProfileDto } from '../dtos/patch-profile-dto';
+import { profile } from 'console';
 
 @Injectable()
 export class ProfilesService {
@@ -45,5 +47,26 @@ export class ProfilesService {
       relations: ['user'],
     });
     return profiles;
+  }
+
+  public async updateProfile(id: number, patchProfileDto: PatchProfileDto) {
+    // Only admins can update the profile
+    const { userId, ...profileData } = patchProfileDto;
+    // find the profile
+    let profile = await this.profilesRepository.findOneBy({
+      id: userId,
+    });
+
+    // get to know if its the administrator trying to delete
+    const user = await this.usersRepository.findOneBy({ id });
+
+    if (user.role === 'admin') {
+      profile.bio = patchProfileDto.bio;
+      profile.city = patchProfileDto.city;
+      profile.country = patchProfileDto.country;
+      return await this.profilesRepository.save(profile);
+    } else {
+      throw new UnauthorizedException('Only admins can Update profiles');
+    }
   }
 }

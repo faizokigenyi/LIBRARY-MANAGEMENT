@@ -23,30 +23,33 @@ export class BooksService {
     const { authorId, ...bookData } = createBookDto;
     // check for the authorId is in users Db, check again if they are authors
     const author = await this.usersService.getUserById(authorId);
-    // check for the genres
-    const genres = await this.genresService.getMultipleGenres(
-      createBookDto.genres,
-    );
 
-    console.log('genres', genres);
-
-    // check if the book already exists
-    const existingBook = await this.bookRepository.findOne({
-      where: { isbn: bookData.isbn },
-    });
-
-    if (existingBook) {
-      throw new UnauthorizedException('Book already exists');
+    if (author.role !== 'author') {
+      throw new UnauthorizedException('Only authors can create the books');
     } else {
-      // create a new book
-      const newBook = this.bookRepository.create({
-        ...bookData,
-        author,
-        genres,
+      const genres = await this.genresService.getMultipleGenres(
+        createBookDto.genres,
+      );
+
+      // check if the book already exists
+      const existingBook = await this.bookRepository.findOne({
+        where: { isbn: bookData.isbn },
       });
-      // save the book to the database
-      return await this.bookRepository.save(newBook);
+
+      if (existingBook) {
+        throw new UnauthorizedException('Book already exists');
+      } else {
+        // create a new book
+        const newBook = this.bookRepository.create({
+          ...bookData,
+          author,
+          genres,
+        });
+        // save the book to the database
+        return await this.bookRepository.save(newBook);
+      }
     }
+    // check for the genres
   }
 
   public async getBookById(id: number) {

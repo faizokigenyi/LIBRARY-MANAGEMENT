@@ -3,26 +3,13 @@ POST http://localhost:3000/books
 Content-Type: application/json
 
 {
-  "title": "Everybody Writes",
-  "authorId": 5,
-  "publishedAt": "2014-09-15",
-  "isbn": "9781118905555",
-  "summary": "Your go-to guide to creating ridiculously good content.",
-  "pageCount": 344,
+  "title": "The Clean Coder",
+  "authorId": 2,
+  "publishedAt": "2011-05-13",
+  "isbn": "978-0137081073",
+  "summary": "A guide to professionalism in software development from Uncle Bob.",
+  "pageCount": 256,
   "language": "English",
-  "genres": [5]
+  "genres": [1, 3]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

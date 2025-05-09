@@ -1,6 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateProfileDto } from './dtos/create-profile-dto';
 import { ProfilesService } from './providers/profiles.service';
+import { PatchProfileDto } from './dtos/patch-profile-dto';
 
 @Controller('profiles')
 export class ProfilesController {
@@ -18,5 +27,13 @@ export class ProfilesController {
   @Get()
   public async getAllProfiles() {
     return await this.profilesService.getAllProfiles();
+  }
+
+  @Patch('/:id')
+  public async patchProfile(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() patchProfileDto: PatchProfileDto,
+  ) {
+    return await this.profilesService.updateProfile(id, patchProfileDto);
   }
 }

@@ -1,0 +1,17 @@
+
+PATCH http://localhost:3000/profiles/3
+Content-Type: application/json
+
+{  
+  "bio": "An avid hustler",
+  "country": "Ireland",
+  "city": "Dublin",
+  "phoneNumber": "+35315550123",
+  "dateOfBirth": "1995-10-05",
+  "gender": "male",
+  "avatarUrl": "https://example.com/avatars/lucas.jpg",
+  "website": "https://lucasreads.ie",
+  "twitterHandle": "@lucasreads",
+  "linkedinHandle": "lucas-price",
+  "userId": 10
+}
